@@ -1,4 +1,16 @@
-import { TokenizerAndRendererExtension, TokenizerThis, Tokens } from 'marked';
+import { RendererExtension, RendererThis, TokenizerExtension, TokenizerThis, Tokens } from 'marked';
+
+export interface ObsidianEmbeddedFileToken extends Tokens.Generic {
+    /**
+     * the type of the token
+     */
+    type: 'obsidian-embedded-file';
+
+    /**
+     * the text of the embedded file
+     */
+    text?: string;
+}
 
 /**
  * This is a tokenizer for obsidian embedded files, like images, pdfs, etc.
@@ -29,7 +41,7 @@ export default {
         }
     },
     // TODO: Implement a renderer for this extension
-    renderer(this: TokenizerThis, token: Tokens.Generic) : string {
+    renderer(this: RendererThis, token: Tokens.Generic) : string {
         return `<img src="${token.text}" />`;
     }
-} as TokenizerAndRendererExtension;
+} as (TokenizerExtension & RendererExtension);

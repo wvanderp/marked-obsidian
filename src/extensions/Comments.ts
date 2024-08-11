@@ -1,4 +1,16 @@
-import { TokenizerAndRendererExtension, TokenizerThis, Tokens } from 'marked';
+import { RendererExtension, TokenizerExtension, TokenizerThis, Tokens } from 'marked';
+
+export interface ObsidianCommentToken extends Tokens.Generic {
+    /**
+     * the type of the token
+     */
+    type: 'obsidian-comment';
+
+    /**
+     * the text of the comment
+     */
+    text?: string;
+}
 
 /**
  * This is a tokenizer for obsidian Comments
@@ -16,7 +28,7 @@ export default {
             return match.index!;
         }
     },
-    tokenizer(this: TokenizerThis, src: string) : Tokens.Generic | undefined
+    tokenizer(this: TokenizerThis, src: string) : ObsidianCommentToken | undefined
     {
         const match = src.match(/^%%(.+?)%%/);
         if (match) {
@@ -28,7 +40,7 @@ export default {
             }
         }
     },
-    renderer(this: TokenizerThis) : string {
+    renderer() : string {
         return '';
     }
-} as TokenizerAndRendererExtension;
+}  as (TokenizerExtension & RendererExtension);

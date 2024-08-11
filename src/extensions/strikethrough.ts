@@ -1,4 +1,4 @@
-import { MarkedToken, Token, TokenizerAndRendererExtension, TokenizerThis, Tokens } from 'marked';
+import { RendererExtension, Token, TokenizerExtension, TokenizerThis, Tokens } from 'marked';
 
 export interface ObsidianStrikethroughToken extends Tokens.Generic {
     /**
@@ -52,4 +52,4 @@ export default {
     renderer({ tokens }: ObsidianStrikethroughToken) {
         return `<s>${tokens ? this.parser.parseInline(tokens) : ''}</s>`;
     }
-} as TokenizerAndRendererExtension;
+} as (TokenizerExtension & RendererExtension);

@@ -30,7 +30,7 @@ describe('runPairs', () => {
     pairs.forEach(pair => {
         it(`should match the expected output for ${pair.name}`, () => {
             const markedObsidian = marked.use(MarkedObsidianPlugin());
-            const actual = markedObsidian(pair.markdown) as string;
+            const actual = markedObsidian.parse(pair.markdown) as string;
 
             const options: X2jOptions = {
                 ignoreAttributes: false,
@@ -39,11 +39,20 @@ describe('runPairs', () => {
                 preserveOrder: true,
             };
 
+
             const parser = new XMLParser(options);
 
             const actualJson = parser.parse(actual);
             const expectedJson = parser.parse(pair.expected);
 
+            
+            if(pair.name === 'Task List') {
+                console.log("expected", pair.expected);
+                console.log("actual", actual);
+                console.log("expectedJson", expectedJson);
+                console.log("actualJson", actualJson);
+            }
+            
             expect(actualJson).toEqual(expectedJson);
         });
     });

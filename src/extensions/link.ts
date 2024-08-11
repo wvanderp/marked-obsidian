@@ -1,4 +1,4 @@
-import { TokenizerAndRendererExtension, TokenizerThis, Tokens } from 'marked';
+import { RendererExtension, RendererThis, TokenizerExtension, TokenizerThis, Tokens } from 'marked';
 
 export interface ObsidianLinkToken extends Tokens.Generic {
     /**
@@ -185,8 +185,8 @@ export default {
             }
         }
     },
-    renderer(this: TokenizerThis, token: ObsidianLinkToken): string {
+    renderer(this: RendererThis, token: ObsidianLinkToken): string {
         const href = `${token.link ? token.link : ''}${token.section ? `#${token.section}` : ''}${token.blockReference ? `#^${token.blockReference}` : ''}`;
         return `<a href="${href}">${token.text}</a>`;
     }
-} as TokenizerAndRendererExtension;
+} as (TokenizerExtension & RendererExtension);

@@ -2,3 +2,4 @@
 - [ ] Update the website
 - [ ] Contact the media
 - [ ] Prepare for the **event**
+- [V] **event** is done

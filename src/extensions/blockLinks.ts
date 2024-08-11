@@ -1,4 +1,16 @@
-import { TokenizerAndRendererExtension, TokenizerThis, Tokens } from 'marked';
+import { RendererExtension, TokenizerExtension, TokenizerThis, Tokens } from 'marked';
+
+export interface ObsidianBlockLinkToken extends Tokens.Generic {
+    /**
+     * the type of the token
+     */
+    type: 'obsidian-block-link';
+
+    /**
+     * the text of the block link
+     */
+    text?: string;
+}
 
 /**
  * This is a tokenizer for obsidian block links
@@ -16,7 +28,7 @@ export default {
             return match.index!;
         }
     },
-    tokenizer(this: TokenizerThis, src: string) : Tokens.Generic | undefined
+    tokenizer(this: TokenizerThis, src: string) : ObsidianBlockLinkToken | undefined
     {
         const match = src.match(/^\^(.+)/);
         if (match) {
@@ -28,8 +40,7 @@ export default {
             }
         }
     },
-    renderer(this: TokenizerThis, tokens: Tokens.Generic[], idx: number) : string {
-        const token = tokens[idx];
+    renderer(token: ObsidianBlockLinkToken) {
         return `<i><a href="#${token.text}">${token.text}</a></i>`;
     }
-} as TokenizerAndRendererExtension;
+} as (TokenizerExtension & RendererExtension);

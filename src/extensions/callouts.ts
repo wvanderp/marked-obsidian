@@ -1,4 +1,26 @@
-import { TokenizerAndRendererExtension, TokenizerThis, Tokens } from 'marked';
+import { RendererExtension, RendererThis, TokenizerExtension, TokenizerThis, Tokens } from 'marked';
+
+export interface ObsidianCalloutToken extends Tokens.Generic {
+    /**
+     * the type of the token
+     */
+    type: 'obsidian-callout';
+
+    /**
+     * the text of the callout
+     */
+    text?: string;
+
+    /**
+     * the type of the callout
+     */
+    calloutType?: string;
+
+    /**
+     * the tokens inside the callout
+     */
+    tokens?: Tokens.Generic[];
+}
 
 /**
  * This is a tokenizer for obsidian callouts
@@ -14,7 +36,7 @@ export default {
     name: 'obsidian-callout',
     level: 'block',
     start(this: TokenizerThis, src: string) : number | void {
-        const match = src.match(/> \[\!\w+\]/);
+        const match = src.match(/^> \[\!\w+\]/);
         if (match) {
             return match.index!;
         }
@@ -33,8 +55,7 @@ export default {
         }
     },
     // TODO: add real rendering
-    renderer(this: TokenizerThis, tokens: Tokens.Generic[], idx: number) : string {
-        const token = tokens[idx];
+    renderer(this: RendererThis, token: Tokens.Generic) : string {
         return `<div class="obsidian-callout obsidian-callout-${token.calloutType}">${token.text}</div>`;
     }
-} as TokenizerAndRendererExtension;
+} as (TokenizerExtension & RendererExtension);

@@ -1,4 +1,21 @@
-import { TokenizerAndRendererExtension, TokenizerThis, Tokens } from 'marked';
+import { RendererExtension, TokenizerExtension, TokenizerThis, Tokens } from 'marked';
+
+export interface ObsidianHighlightToken extends Tokens.Generic {
+    /**
+     * the type of the token
+     */
+    type: 'obsidian-highlight';
+
+    /**
+     * the text of the highlight
+     */
+    text?: string;
+
+    /**
+     * the tokens inside the highlight
+     */
+    tokens?: Tokens.Generic[];
+}
 
 /**
  * This is a tokenizer for obsidian highlight
@@ -21,14 +38,20 @@ export default {
         const match = src.match(/^==(.+?)==/);
         if (match) {
             const [fullMatch, text] = match;
-            return {
+            const token: ObsidianHighlightToken = {
                 type: 'obsidian-highlight',
                 raw: fullMatch,
                 text,
             }
+
+            if (token.text) {
+                token.tokens = this.lexer.inline(token.text, token.tokens);
+            }
+
+            return token;
         }
     },
-    renderer(this: TokenizerThis, tokens: Tokens.Generic[]) : string {
-        return `<mark>${tokens.map(t => t.text).join('')}</mark>`;
+    renderer({ tokens }: ObsidianHighlightToken) {
+        return `<mark>${tokens ? this.parser.parseInline(tokens) : ''}</mark>`;
     }
-} as TokenizerAndRendererExtension;
+} as (TokenizerExtension & RendererExtension);
