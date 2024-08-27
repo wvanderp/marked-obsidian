@@ -35,27 +35,7 @@ export interface ObsidianCalloutToken extends Tokens.Generic {
 export default {
     name: 'obsidian-callout',
     level: 'block',
-    start(this: TokenizerThis, src: string) : number | void {
-        const match = src.match(/^> \[\!\w+\]/);
-        if (match) {
-            return match.index!;
-        }
-    },
-    tokenizer(this: TokenizerThis, src: string) : Tokens.Generic | undefined
-    {
-        const match = src.match(/^> \[\!(\w+)\](.*)$/);
-        if (match) {
-            const [fullMatch, type, text] = match;
-            return {
-                type: 'obsidian-callout',
-                raw: fullMatch,
-                text,
-                calloutType: type
-            }
-        }
-    },
-    // TODO: add real rendering
-    renderer(this: RendererThis, token: Tokens.Generic) : string {
-        return `<div class="obsidian-callout obsidian-callout-${token.calloutType}">${token.text}</div>`;
+    renderer({ tokens, calloutType }: Tokens.Generic) {
+        return `<div class="obsidian-callout obsidian-callout-${calloutType}">${tokens ? this.parser.parse(tokens) : ''}</div>`;
     }
 } as (TokenizerExtension & RendererExtension);

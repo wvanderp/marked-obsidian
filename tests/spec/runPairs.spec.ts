@@ -46,12 +46,12 @@ describe('runPairs', () => {
             const expectedJson = parser.parse(pair.expected);
 
             
-            if(pair.name === 'Task List') {
-                console.log("expected", pair.expected);
-                console.log("actual", actual);
-                console.log("expectedJson", expectedJson);
-                console.log("actualJson", actualJson);
-            }
+            // if(pair.name === 'Task List') {
+            //     console.log("expected", pair.expected);
+            //     console.log("actual", actual);
+            //     console.log("expectedJson", expectedJson);
+            //     console.log("actualJson", actualJson);
+            // }
             
             expect(actualJson).toEqual(expectedJson);
         });
