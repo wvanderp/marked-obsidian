@@ -7,6 +7,7 @@ import strikethrough from './extensions/strikethrough'
 import highlight from './extensions/highlight'
 import callouts from './extensions/callouts'
 import walkTokens from './walkTokens'
+import commentsBlock from './extensions/commentsBlock'
 
 export default function MarkedObsidianPlugin(): MarkedExtension {
     return {
@@ -16,6 +17,7 @@ export default function MarkedObsidianPlugin(): MarkedExtension {
             embeddedFile,
             blockLinks,
             comments,
+            commentsBlock,
             strikethrough,
             highlight,
             callouts

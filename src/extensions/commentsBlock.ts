@@ -19,13 +19,15 @@ export interface ObsidianCommentToken extends Tokens.Generic {
  * 
  * but also %% inline comments %%
  * 
- * for the block comments @see commentsBlock.ts
+ * %%
+ * and block comments
+ * %%
  * 
  * @see https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Comments
  */
 export default {
     name: 'obsidian-comment',
-    level: 'inline',
+    level: 'block',
     start(this: TokenizerThis, src: string) : number | void {
         const match = src.match(/%%/);
         if (match) {
@@ -37,13 +39,15 @@ export default {
         const match = src.match(/^%%(.+?)%%/s);
 
         if (match) {
+        console.log('match', match);
+
             const [fullMatch, text] = match;
 
             console.log('fullMatch', text);
             return {
                 type: 'obsidian-comment',
                 raw: fullMatch,
-                text,
+                text: text.trim(),
             }
         }
     },

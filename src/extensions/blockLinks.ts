@@ -41,6 +41,6 @@ export default {
         }
     },
     renderer(token: ObsidianBlockLinkToken) {
-        return `<i><a href="#${token.text}">${token.text}</a></i>`;
+        return `<i><a name="${token.text}">${token.text}</a></i>`;
     }
 } as (TokenizerExtension & RendererExtension);
