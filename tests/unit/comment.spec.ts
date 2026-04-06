@@ -30,6 +30,7 @@ describe('comment', () => {
                         type: 'text',
                         raw: 'This is a ',
                         text: 'This is a ',
+                        escaped: false,
                     }
                 ]
             },

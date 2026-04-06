@@ -32,17 +32,28 @@ export default function walkTokens(token: Token): void | Promise<void> {
         token.checked = checkMark !== ' '
         token.text = text
 
+        // Marked now emits a dedicated checkbox token for task items.
+        // For Obsidian-style checked markers (e.g. [V]), add it explicitly.
+        if (token.checked && token.tokens && token.tokens[0]?.type !== 'checkbox') {
+            token.tokens.unshift({
+                type: 'checkbox',
+                raw: `[${checkMark}] `,
+                checked: true
+            })
+        }
+
         // remove the check mark from the text
-        if (token.tokens && token.tokens[0] &&  token.tokens[0].type === 'text' && token.tokens[0].text.startsWith('[')) {
-            token.tokens[0].text = token.tokens[0].text.replace(/^\[(.)\] /, '');
-            token.tokens[0].raw = token.tokens[0].raw.replace(/^\[(.)\] /, '');
+        const textTokenIndex = token.tokens && token.tokens[0]?.type === 'checkbox' ? 1 : 0
+        if (token.tokens && token.tokens[textTokenIndex] && token.tokens[textTokenIndex].type === 'text' && token.tokens[textTokenIndex].text.startsWith('[')) {
+            token.tokens[textTokenIndex].text = token.tokens[textTokenIndex].text.replace(/^\[(.)\] /, '');
+            token.tokens[textTokenIndex].raw = token.tokens[textTokenIndex].raw.replace(/^\[(.)\] /, '');
 
             // splice off the first token of this token
-            ((token.tokens[0]) as Tokens.Text)?.tokens?.splice(0, 1)
+            ((token.tokens[textTokenIndex]) as Tokens.Text)?.tokens?.splice(0, 1)
 
             // if tokens is empty, remove it
-            if (((token.tokens[0]) as Tokens.Text)?.tokens?.length === 0) {
-                delete ((token.tokens[0]) as Tokens.Text)?.tokens;
+            if (((token.tokens[textTokenIndex]) as Tokens.Text)?.tokens?.length === 0) {
+                delete ((token.tokens[textTokenIndex]) as Tokens.Text)?.tokens;
             }
         }
     }

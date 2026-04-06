@@ -18,7 +18,8 @@ describe('blockLinks', () => {
                             {
                                 "type": "text",
                                 "raw": "strike trough",
-                                "text": "strike trough"
+                                "text": "strike trough",
+                                "escaped": false
                             }
                         ]
                     }

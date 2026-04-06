@@ -43,6 +43,11 @@ describe('walkTokens - list_item', () => {
             text: '**event** is done',
             tokens: [
                 {
+                    type: 'checkbox',
+                    raw: '[V] ',
+                    checked: true,
+                },
+                {
                     type: 'text',
                     raw: '**event** is done',
                     text: '**event** is done',
@@ -142,10 +147,14 @@ describe('walkTokens - list_item', () => {
                         "type": "list_item",
                         "raw": "- [x] Write the **press release**",
                         "task": true,
-                        "checked": true,
                         "loose": false,
                         "text": "Write the **press release**",
                         "tokens": [
+                            {
+                                "type": "checkbox",
+                                "raw": "[x] ",
+                                "checked": true
+                            },
                             {
                                 "type": "text",
                                 "raw": "Write the **press release**",
@@ -154,7 +163,8 @@ describe('walkTokens - list_item', () => {
                                     {
                                         "type": "text",
                                         "raw": "Write the ",
-                                        "text": "Write the "
+                                        "text": "Write the ",
+                                        "escaped": false
                                     },
                                     {
                                         "type": "strong",
@@ -164,13 +174,15 @@ describe('walkTokens - list_item', () => {
                                             {
                                                 "type": "text",
                                                 "raw": "press release",
-                                                "text": "press release"
+                                                "text": "press release",
+                                                "escaped": false
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "checked": true
                     }
                 ]
             }

@@ -18,7 +18,8 @@ describe('strikeTrough', () => {
                             {
                                 "type": "text",
                                 "raw": "strike trough",
-                                "text": "strike trough"
+                                "text": "strike trough",
+                                "escaped": false
                             }
                         ]
                     }
@@ -54,7 +55,8 @@ describe('strikeTrough', () => {
                                     {
                                         "type": "text",
                                         "raw": "strike trough",
-                                        "text": "strike trough"
+                                        "text": "strike trough",
+                                        "escaped": false
                                     }
                                 ]
                             }

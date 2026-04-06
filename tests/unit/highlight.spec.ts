@@ -18,7 +18,8 @@ describe('highlight', () => {
                             {
                                 "type": "text",
                                 "raw": "highlighted text",
-                                "text": "highlighted text"
+                                "text": "highlighted text",
+                                "escaped": false
                             }
                         ]
                     }
