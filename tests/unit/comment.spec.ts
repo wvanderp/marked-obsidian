@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { marked } from 'marked';
 import MarkedObsidianPlugin from '../../src';
 import commentParser from '../../src/extensions/comments';
 import exp from 'constants';

@@ -39,7 +39,6 @@ export default {
         if (match) {
             const [fullMatch, text] = match;
 
-            console.log('fullMatch', text);
             return {
                 type: 'obsidian-comment',
                 raw: fullMatch,

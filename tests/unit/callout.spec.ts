@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { marked } from 'marked';
 import MarkedObsidianPlugin from '../../src';
 import walkTokens from '../../src/walkTokens';
 

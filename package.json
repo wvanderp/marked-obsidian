@@ -4,7 +4,8 @@
   "description": "A obsidian plugin for the marked markdown parser",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "author": "",
   "license": "MIT",
@@ -12,17 +13,11 @@
     "marked": "^14.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-typescript": "^7.24.7",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^22.5.1",
+    "@types/node": "^22.1.0",
     "fast-xml-parser": "^4.4.1",
-    "babel-jest": "^29.7.0",
     "html-to-json-parser": "^2.0.1",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.1"
   }
 }

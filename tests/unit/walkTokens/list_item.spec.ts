@@ -1,3 +1,4 @@
+import { expect, describe, it } from 'vitest';
 import walkTokens from '../../../src/walkTokens';
 import { marked } from 'marked';
 import MarkedObsidianPlugin from '../../../src';
@@ -131,49 +132,49 @@ describe('walkTokens - list_item', () => {
 
         const expected = [
             {
-              "type": "list",
-              "raw": "- [x] Write the **press release**",
-              "ordered": false,
-              "start": "",
-              "loose": false,
-              "items": [
-                {
-                  "type": "list_item",
-                  "raw": "- [x] Write the **press release**",
-                  "task": true,
-                  "checked": true,
-                  "loose": false,
-                  "text": "Write the **press release**",
-                  "tokens": [
+                "type": "list",
+                "raw": "- [x] Write the **press release**",
+                "ordered": false,
+                "start": "",
+                "loose": false,
+                "items": [
                     {
-                      "type": "text",
-                      "raw": "Write the **press release**",
-                      "text": "Write the **press release**",
-                      "tokens": [
-                        {
-                          "type": "text",
-                          "raw": "Write the ",
-                          "text": "Write the "
-                        },
-                        {
-                          "type": "strong",
-                          "raw": "**press release**",
-                          "text": "press release",
-                          "tokens": [
+                        "type": "list_item",
+                        "raw": "- [x] Write the **press release**",
+                        "task": true,
+                        "checked": true,
+                        "loose": false,
+                        "text": "Write the **press release**",
+                        "tokens": [
                             {
-                              "type": "text",
-                              "raw": "press release",
-                              "text": "press release"
+                                "type": "text",
+                                "raw": "Write the **press release**",
+                                "text": "Write the **press release**",
+                                "tokens": [
+                                    {
+                                        "type": "text",
+                                        "raw": "Write the ",
+                                        "text": "Write the "
+                                    },
+                                    {
+                                        "type": "strong",
+                                        "raw": "**press release**",
+                                        "text": "press release",
+                                        "tokens": [
+                                            {
+                                                "type": "text",
+                                                "raw": "press release",
+                                                "text": "press release"
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                          ]
-                        }
-                      ]
+                        ]
                     }
-                  ]
-                }
-              ]
+                ]
             }
-          ];
+        ];
 
         expect(JSON.stringify(tokens, null, 2)).toBe(JSON.stringify(expected, null, 2))
     });

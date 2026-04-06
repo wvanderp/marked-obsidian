@@ -39,11 +39,8 @@ export default {
         const match = src.match(/^%%(.+?)%%/s);
 
         if (match) {
-        console.log('match', match);
-
             const [fullMatch, text] = match;
 
-            console.log('fullMatch', text);
             return {
                 type: 'obsidian-comment',
                 raw: fullMatch,

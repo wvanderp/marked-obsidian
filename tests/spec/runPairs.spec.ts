@@ -6,7 +6,7 @@
 import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { X2jOptions, XMLParser } from 'fast-xml-parser';
-import marked from 'marked';
+import { marked } from 'marked';
 import MarkedObsidianPlugin from '../../src';
 
 const testDir = join(__dirname, './pairs');
@@ -44,14 +44,6 @@ describe('runPairs', () => {
 
             const actualJson = parser.parse(actual);
             const expectedJson = parser.parse(pair.expected);
-
-            
-            // if(pair.name === 'Task List') {
-            //     console.log("expected", pair.expected);
-            //     console.log("actual", actual);
-            //     console.log("expectedJson", expectedJson);
-            //     console.log("actualJson", actualJson);
-            // }
             
             expect(actualJson).toEqual(expectedJson);
         });
