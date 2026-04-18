@@ -110,10 +110,8 @@ export function parseLink(src: string): { link?: string, text?: string, section?
     if (!text) {
         if (link) {
             text = `${link}${section ? `#${section}` : ''}${blockReference ? `#^${blockReference}` : ''}`;
-        } else if (section) {
+        } else {
             text = section;
-        } else if (blockReference) {
-            text = `^${blockReference}`;
         }
     }
 

@@ -44,9 +44,7 @@ export default {
                 text,
             }
 
-            if (token.text) {
-                token.tokens = this.lexer.inline(token.text, token.tokens);
-            }
+            token.tokens = this.lexer.inline(text, token.tokens);
 
             return token;
         }

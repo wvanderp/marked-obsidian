@@ -1,6 +1,10 @@
 import { parseLink } from '../../src/extensions/link';
 
-describe.only('parseLink', () => {
+describe('parseLink', () => {
+    it('should throw on invalid link', () => {
+        expect(() => parseLink('not a link')).toThrow('Invalid link');
+    });
+
     it('should parse a simple link', () => {
         const link = parseLink('[[Three laws of motion]]');
         expect(link).toEqual({

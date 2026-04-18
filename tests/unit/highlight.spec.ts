@@ -1,5 +1,6 @@
 import { marked } from 'marked';
 import MarkedObsidianPlugin from '../../src';
+import highlightExt from '../../src/extensions/highlight';
 
 describe('highlight', () => {
     it('should return highlighted text', () => {
@@ -31,5 +32,14 @@ describe('highlight', () => {
             .use(MarkedObsidianPlugin())
             .lexer(input);
         expect(JSON.stringify(tokens, null, 2)).toEqual(JSON.stringify(expected, null, 2));
+    });
+
+    it('should render with no tokens as empty mark', () => {
+        const renderer = highlightExt.renderer!;
+        const result = renderer.call(
+            { parser: { parseInline: (t: any) => t } } as any,
+            { tokens: undefined } as any
+        );
+        expect(result).toBe('<mark></mark>');
     });
 });

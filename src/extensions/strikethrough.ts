@@ -42,9 +42,7 @@ export default {
                 text,
             } as ObsidianStrikethroughToken;
 
-            if (token.text && token.text.length > 0) {
-                token.tokens = this.lexer.inline(token.text, token.tokens);
-            }
+            token.tokens = this.lexer.inline(text, token.tokens);
 
             return token;
         }
