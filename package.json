@@ -2,8 +2,21 @@
   "name": "marked-obsidian",
   "version": "1.0.0",
   "description": "A obsidian plugin for the marked markdown parser",
-  "main": "index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsdown",
     "test": "vitest run --coverage",
     "lint": "npm run lint:eslint && npm run typecheck",
     "lint:eslint": "eslint .",
@@ -24,6 +37,7 @@
     "html-to-json-parser": "^2.0.1",
     "jiti": "^2.6.1",
     "ts-node": "^10.9.2",
+    "tsdown": "^0.21.9",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.0",
     "vitest": "^4.1.2"
