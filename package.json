@@ -1,7 +1,7 @@
 {
   "name": "marked-obsidian",
-  "version": "1.0.0",
-  "description": "A obsidian plugin for the marked markdown parser",
+  "version": "0.1.0",
+  "description": "A marked plugin for Obsidian-flavored markdown syntax",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -15,6 +15,32 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "marked",
+    "obsidian",
+    "markdown",
+    "plugin",
+    "wikilinks",
+    "callouts",
+    "highlight",
+    "obsidian-md"
+  ],
+  "author": {
+    "name": "wvanderp",
+    "url": "https://github.com/wvanderp"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/wvanderp/marked-obsidian#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wvanderp/marked-obsidian.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wvanderp/marked-obsidian/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsdown",
     "test": "vitest run --coverage",
@@ -22,10 +48,8 @@
     "lint:eslint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "marked": "^18.0.2"
+  "peerDependencies": {
+    "marked": ">=14"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

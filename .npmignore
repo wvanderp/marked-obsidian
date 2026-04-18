@@ -1,0 +1,17 @@
+# Source & tests
+src/
+tests/
+coverage/
+
+# Config files
+eslint.config.ts
+tsconfig.json
+tsdown.config.ts
+vitest.config.ts
+
+# CI & GitHub
+.github/
+
+# Misc
+*.log
+.DS_Store

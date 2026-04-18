@@ -1,5 +1,10 @@
 # marked-obsidian
 
+[![npm version](https://img.shields.io/npm/v/marked-obsidian.svg)](https://www.npmjs.com/package/marked-obsidian)
+[![CI](https://github.com/wvanderp/marked-obsidian/actions/workflows/ci.yml/badge.svg)](https://github.com/wvanderp/marked-obsidian/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/codecov/c/github/wvanderp/marked-obsidian)](https://codecov.io/gh/wvanderp/marked-obsidian)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A [marked](https://marked.js.org/) plugin that adds support for [Obsidian](https://obsidian.md/)-specific markdown syntax.
 
 ## Setup
