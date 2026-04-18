@@ -1,6 +1,8 @@
 import { marked } from 'marked';
 import MarkedObsidianPlugin from '../../src';
 import strikethroughExt from '../../src/extensions/strikethrough';
+import { ObsidianStrikethroughToken } from '../../src/extensions/strikethrough';
+import { RendererThis } from 'marked';
 
 describe('strikeTrough', () => {
     it('should return a string with a strike trough', () => {
@@ -75,9 +77,18 @@ describe('strikeTrough', () => {
 
     it('should render with no tokens as empty s tag', () => {
         const renderer = strikethroughExt.renderer!;
+        const context = {
+            parser: {
+                parseInline: (tokens: unknown) => String(tokens)
+            }
+        };
+        const token: ObsidianStrikethroughToken = {
+            type: 'obsidian-strikethrough',
+            raw: '~~~~'
+        };
         const result = renderer.call(
-            { parser: { parseInline: (t: any) => t } } as any,
-            { tokens: undefined } as any
+            context as unknown as RendererThis<string, string>,
+            token
         );
         expect(result).toBe('<s></s>');
     });

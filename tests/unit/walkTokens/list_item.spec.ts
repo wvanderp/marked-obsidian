@@ -1,6 +1,6 @@
 import { expect, describe, it } from 'vitest';
 import walkTokens from '../../../src/walkTokens';
-import { marked } from 'marked';
+import { marked, Tokens } from 'marked';
 import MarkedObsidianPlugin from '../../../src';
 
 describe('walkTokens - list_item', () => {
@@ -233,7 +233,7 @@ describe('walkTokens - list_item', () => {
         expect(token.checked).toBe(true)
         expect(token.text).toBe('done')
         // The inner tokens array should be deleted since it became empty after splice
-        const textToken = token.tokens[1] as any;
+        const textToken = token.tokens[1] as Tokens.Text;
         expect(textToken.tokens).toBeUndefined();
     });
 
@@ -498,7 +498,7 @@ describe('walkTokens - list_item', () => {
             checked: undefined,
             loose: false,
             text: "[V] text",
-            tokens: [] as any[]
+            tokens: [] as Tokens.ListItem['tokens']
         }
 
         // Should not throw

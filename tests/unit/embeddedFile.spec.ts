@@ -1,5 +1,6 @@
 import { marked } from 'marked';
 import MarkedObsidianPlugin from '../../src';
+import { Tokens } from 'marked';
 
 describe('embeddedFile', () => {
     it('should parse embedded file links', () => {
@@ -7,9 +8,9 @@ describe('embeddedFile', () => {
 
         const tokens = marked.use(MarkedObsidianPlugin()).lexer(input);
 
-        const paragraph = tokens[0];
+        const paragraph = tokens[0] as Tokens.Paragraph;
         expect(paragraph.type).toBe('paragraph');
-        const embeddedToken = (paragraph as any).tokens.find((t: any) => t.type === 'obsidian-embedded-file');
+        const embeddedToken = paragraph.tokens.find(t => t.type === 'obsidian-embedded-file');
         expect(embeddedToken).toEqual({
             type: 'obsidian-embedded-file',
             raw: '![[image.png]]',

@@ -1,6 +1,8 @@
 import { marked } from 'marked';
 import MarkedObsidianPlugin from '../../src';
 import inlineComment from '../../src/extensions/Comments';
+import { RendererThis, TokenizerThis, Tokens } from 'marked';
+import { ObsidianCommentToken } from '../../src/extensions/Comments';
 
 describe('comment', () => {
     it('should parse comments', () => {
@@ -69,19 +71,22 @@ describe('comment', () => {
     describe('inline comment extension', () => {
         it('start should return index when %% is found', () => {
             const start = inlineComment.start!;
-            const result = start.call({ lexer: {} } as any, 'hello %%comment%% world');
+            const tokenizerThis = { lexer: {} } as TokenizerThis;
+            const result = start.call(tokenizerThis, 'hello %%comment%% world');
             expect(result).toBe(6);
         });
 
         it('start should return undefined when no %% is found', () => {
             const start = inlineComment.start!;
-            const result = start.call({ lexer: {} } as any, 'hello world');
+            const tokenizerThis = { lexer: {} } as TokenizerThis;
+            const result = start.call(tokenizerThis, 'hello world');
             expect(result).toBeUndefined();
         });
 
         it('tokenizer should return a token for inline comments', () => {
             const tokenizer = inlineComment.tokenizer!;
-            const result = tokenizer.call({ lexer: {} } as any, '%%inline comment%%');
+            const tokenizerThis = { lexer: {} } as TokenizerThis;
+            const result = tokenizer.call(tokenizerThis, '%%inline comment%%', [] as Tokens.Generic[]);
             expect(result).toEqual({
                 type: 'obsidian-comment',
                 raw: '%%inline comment%%',
@@ -91,13 +96,19 @@ describe('comment', () => {
 
         it('tokenizer should return undefined when no match', () => {
             const tokenizer = inlineComment.tokenizer!;
-            const result = tokenizer.call({ lexer: {} } as any, 'no comment here');
+            const tokenizerThis = { lexer: {} } as TokenizerThis;
+            const result = tokenizer.call(tokenizerThis, 'no comment here', [] as Tokens.Generic[]);
             expect(result).toBeUndefined();
         });
 
         it('renderer should return empty string', () => {
             const renderer = inlineComment.renderer!;
-            const result = renderer.call({ parser: {} } as any, {} as any);
+            const context = { parser: {} } as const;
+            const token: ObsidianCommentToken = {
+                type: 'obsidian-comment',
+                raw: '%%%%'
+            };
+            const result = renderer.call(context as unknown as RendererThis<string, string>, token);
             expect(result).toBe('');
         });
     });
